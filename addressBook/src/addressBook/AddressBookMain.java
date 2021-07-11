@@ -1,3 +1,8 @@
+/*
+ * Purpose :: Create a contact in address book
+ * @author Vivek Varshney
+ */
+
 package addressBook;
 
 import java.util.ArrayList;
@@ -179,6 +184,21 @@ public class AddressBookMain {
 			System.out.println(arr);
 	}
 
+	public boolean deleteContact(String name) {
+		int flag = 0;
+		for (Person contact : personDetailsList) {
+			if (contact.getFirstName().equals(name)) {
+				personDetailsList.remove(contact);
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 1)
+			return true;
+		else
+			return false;
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Address book Program");
 		AddressBookMain editDetail = new AddressBookMain();
@@ -186,7 +206,7 @@ public class AddressBookMain {
 
 		while (flag) {
 			System.out.println("Choose what you want to do: ");
-			System.out.println("1 Add details.\n2 Edit details. \n3 display all. \n4 Exit.");
+			System.out.println("1 Add details.\n2 Edit details. \n3 display all. \n4 Delete person details. \n5 Exit.");
 			int choose = sc.nextInt();
 			switch (choose) {
 			case 1:
@@ -199,6 +219,16 @@ public class AddressBookMain {
 				editDetail.Display_All(personDetailsList);
 				break;
 			case 4:
+				System.out.println("Enter the Contact to be deleted:");
+				String confirm_name = sc.next();
+				boolean listDeleted = editDetail.deleteContact(confirm_name);
+				if (listDeleted) {
+					System.out.println("Deleted Contact from the List");
+				} else {
+					System.out.println("List Cannot be Deleted");
+				}
+				break;
+			case 5:
 				flag = false;
 				break;
 			default:
