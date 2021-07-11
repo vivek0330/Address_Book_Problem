@@ -83,30 +83,92 @@ class Person {
 	@Override
 	public String toString() {
 		return '\n' + "Contact is" + '\n' + "First Name :: " + firstName + '\n' + "Last  Name :: " + lastName + '\n'
-				+ "City : " + city + '\n' + "State :: " + state + "zip :: " + pinCode + '\n' + "Phone Number :: "
-				+ mobNumber + '\n' + "Email Id :: " + email + '\n';
+				+ "City : " + city + '\n' + "State :: " + state + '\n' + "pinCode :: " + pinCode + '\n'
+				+ "Phone Number :: " + mobNumber + '\n' + "Email Id :: " + email + '\n';
 
 	}
+
+}
+
+public class AddressBookMain {
+	static Scanner sc = new Scanner(System.in);
+	static ArrayList<Person> personDetailsList = new ArrayList<Person>();
 
 	public void addDetails() {
 
 		// taking value from user
-		Scanner sc = new Scanner(System.in);
+		Person details = new Person();
 		System.out.println("Add person Deatils");
 		System.out.print("Enter First Name :: ");
-		this.firstName = sc.nextLine();
+		details.setFirstName(sc.next());
 		System.out.print("Enter Last Name :: ");
-		this.lastName = sc.nextLine();
+		details.setLastName(sc.next());
 		System.out.print("Enter City :: ");
-		this.city = sc.nextLine();
+		details.setCity(sc.next());
 		System.out.print("Enter State :: ");
-		this.state = sc.nextLine();
+		details.setState(sc.next());
 		System.out.print("Enter pinCode :: ");
-		this.pinCode = sc.nextLong();
+		details.setPinCode(sc.nextLong());
 		System.out.print("Enter mobNumber :: ");
-		this.mobNumber = sc.nextLong();
+		details.setMobNumber(sc.nextLong());
 		System.out.print("Enter Email ID :: ");
-		this.email = sc.next();
+		details.setEmail(sc.next());
+
+		personDetailsList.add(details);
+	}
+
+	public void editDetails() {
+		System.out.println("Confirm your first name to edit details: ");
+		String confirm_name = sc.next();
+
+		for (int i = 0; i < personDetailsList.size(); i++) {
+			if (personDetailsList.get(i).getFirstName().equals(confirm_name)) {
+				System.out.println("Select form below to change: ");
+				System.out.println(
+						"\n1.First Name\n2.Last Name\n3.Address\n4.city\n5.State\n6.Zip\n7.Mobile number\n8.Email");
+				int edit = sc.nextInt();
+
+				switch (edit) {
+				case 1:
+					System.out.println("Enter new first name");
+					personDetailsList.get(i).setFirstName(sc.next());
+					break;
+				case 2:
+					System.out.println("Enter new Last name");
+					personDetailsList.get(i).setLastName(sc.next());
+					break;
+				case 3:
+					System.out.println("Enter new Address");
+					personDetailsList.get(i).setAddress(sc.next());
+					break;
+				case 4:
+					System.out.println("Enter new City");
+					personDetailsList.get(i).setCity(sc.next());
+					break;
+				case 5:
+					System.out.println("Enter new State");
+					personDetailsList.get(i).setState(sc.next());
+					break;
+				case 6:
+					System.out.println("Enter new Zip");
+					personDetailsList.get(i).setPinCode(sc.nextLong());
+					break;
+				case 7:
+					System.out.println("Enter new Mobile number");
+					personDetailsList.get(i).setMobNumber(sc.nextLong());
+					break;
+				case 8:
+					System.out.println("Enter new E-mail");
+					personDetailsList.get(i).setEmail(sc.next());
+					break;
+				}
+				System.out.println("Edited list is: ");
+				System.out.println(personDetailsList);
+
+			} else
+				System.out.println("Enter valid First name");
+		}
+
 	}
 
 	public void Display_All(ArrayList<Person> arr) {
@@ -117,36 +179,32 @@ class Person {
 			System.out.println(arr);
 	}
 
-}
-
-public class AddressBookMain {
 	public static void main(String[] args) {
 		System.out.println("Welcome to Address book Program");
-		Scanner sc = new Scanner(System.in);
-		ArrayList<Person> list = new ArrayList<Person>();
-		int option;
-		do {
-			Person personDetails = new Person();
-			System.out.println("Enter your option");
-			System.out.println("1 Add contact  ");
-			System.out.println("2 Display all contact ");
+		AddressBookMain editDetail = new AddressBookMain();
+		boolean flag = true;
 
-			option = sc.nextInt();
-
-			switch (option) {
+		while (flag) {
+			System.out.println("Choose what you want to do: ");
+			System.out.println("1 Add details.\n2 Edit details. \n3 display all. \n4 Exit.");
+			int choose = sc.nextInt();
+			switch (choose) {
 			case 1:
-				personDetails.addDetails();
-				list.add(personDetails);
+				editDetail.addDetails();
 				break;
 			case 2:
-				personDetails.Display_All(list);
+				editDetail.editDetails();
+				break;
+			case 3:
+				editDetail.Display_All(personDetailsList);
+				break;
+			case 4:
+				flag = false;
 				break;
 			default:
-				System.out.println("Enter valid option");
+				System.out.println("Choose valid option");
 				break;
 			}
-			System.out.println("Do you want to continue (1 Continue \n 0 Exit)");
-			option = sc.nextInt();
-		} while (option != 0);
+		}
 	}
 }
