@@ -1,99 +1,7 @@
-/*
- * Purpose :: Create a contact in address book
- * @author Vivek Varshney
- */
-
 package addressBook;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-class Person {
-
-	// Declare variables
-	private String firstName;
-	private String lastName;
-	private String address;
-	private String city;
-	private String state;
-	private long pinCode;
-	private String email;
-	private long mobNumber;
-
-	// use getters and setters for class variables
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public long getPinCode() {
-		return pinCode;
-	}
-
-	public void setPinCode(long pinCode) {
-		this.pinCode = pinCode;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public long getMobNumber() {
-		return mobNumber;
-	}
-
-	public void setMobNumber(long mobNumber) {
-		this.mobNumber = mobNumber;
-	}
-
-	@Override
-	public String toString() {
-		return '\n' + "Contact is" + '\n' + "First Name :: " + firstName + '\n' + "Last  Name :: " + lastName + '\n'
-				+ "City : " + city + '\n' + "State :: " + state + '\n' + "pinCode :: " + pinCode + '\n'
-				+ "Phone Number :: " + mobNumber + '\n' + "Email Id :: " + email + '\n';
-
-	}
-
-}
 
 public class AddressBookMain {
 	static Scanner sc = new Scanner(System.in);
@@ -120,6 +28,7 @@ public class AddressBookMain {
 		details.setEmail(sc.next());
 
 		personDetailsList.add(details);
+		//System.out.println(personDetailsList);
 	}
 
 	public void editDetails() {
@@ -200,13 +109,15 @@ public class AddressBookMain {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to Address book Program");
+		System.out.println("************************************************************************************");
+		System.out.println("*                                Address Book System                               *");
+		System.out.println("************************************************************************************");
 		AddressBookMain editDetail = new AddressBookMain();
 		boolean flag = true;
 
 		while (flag) {
 			System.out.println("Choose what you want to do: ");
-			System.out.println("1 Add details.\n2 Edit details. \n3 display all. \n4 Delete person details. \n5 Exit.");
+			System.out.println("\n1 Add details.\n2 Edit details. \n3 display all. \n4 Delete person details. \n5 Exit.\n");
 			int choose = sc.nextInt();
 			switch (choose) {
 			case 1:
