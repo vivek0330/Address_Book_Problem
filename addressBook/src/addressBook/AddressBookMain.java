@@ -105,6 +105,22 @@ public class AddressBookMain {
 	}
 
 	/*
+	 * Method to check for duplicate entry before adding the person.
+	 */
+	public void duplicateCheck(String firstName) {
+		for (int k = 0; k < personDetailsList.size(); k++) {
+			String contactName = personDetailsList.get(k).getFirstName();
+
+			if (firstName.equals(contactName)) {
+				System.out.println("This Person is Already Present");
+			} else {
+				System.out.println("You can Add this Person");
+				break;
+			}
+		}
+	}
+
+	/*
 	 * Delete person details through person 1st name
 	 */
 	public boolean deleteContact(String name) {
@@ -196,8 +212,12 @@ public class AddressBookMain {
 					personDetailsList = hashmap.get(address_name_old);
 					while (true) {
 						System.out.println("Choose what you want to do: ");
-						System.out.println("1.Add details.\n2.Edit details.\n3.Delete contact.\n4.Exit");
+						System.out.println("1.Add details.\n2.Edit details.\n3.Delete contact.\n4.Duplicate check.\n5.Exit");
 						int choose1 = sc.nextInt();
+						if (choose1 == 5) {
+							System.out.println("exit");
+							break;
+						}
 						switch (choose1) {
 						case 1:
 							personDetails.addDetails();
@@ -216,8 +236,10 @@ public class AddressBookMain {
 							}
 							break;
 						case 4:
-							System.out.println("Exit");
-							break;
+							System.out.println("Enter first name to check for duplicate");
+                            String enteredName = sc.next();
+                            personDetails.duplicateCheck(enteredName);
+                            break;
 						default:
 							System.out.println("Choose valid option :: ");
 							break;
