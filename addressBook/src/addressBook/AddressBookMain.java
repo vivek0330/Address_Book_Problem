@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AddressBookMain {
-	public ArrayList<contactInfo> contactList = new ArrayList<>();
+	public static final ArrayList<contactInfo> contactList = new ArrayList<>();
 	public static Map<String, contactInfo> nameHashMap = new HashMap<String, contactInfo>();
 	public static Map<String, contactInfo> cityHashMap = new HashMap<String, contactInfo>();
 	public static Map<String, contactInfo> stateHashMap = new HashMap<String, contactInfo>();
@@ -105,7 +105,6 @@ public class AddressBookMain {
 
 	// method for show option for contacts
 	public static void addressBookOptions(AddressBookMain addressBook) {
-		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			System.out.println("\n-------------------------- Address Book Contact Option --------------------------");
@@ -174,9 +173,7 @@ public class AddressBookMain {
 	}
 
 	public void searchByOptions() {
-		@SuppressWarnings("unused")
 		AddressBookMain addressBook = new AddressBookMain();
-		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1. By name");
 		System.out.println("2. By city");
@@ -211,7 +208,6 @@ public class AddressBookMain {
 
 	// method for view element by option
 	public static void viewByOption(Map<String, AddressBookMain> addressBookMap) {
-		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1. View By name");
 		System.out.println("2. View By city");
@@ -234,6 +230,33 @@ public class AddressBookMain {
 			return;
 		default:
 			System.out.println("INVALID CHOICE!");
+		}
+	}
+
+	// method to count element by option
+	public static void countByOption() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("1. Count City ");
+		System.out.println("2. Count State");
+		System.out.println("3. Back ");
+		System.out.println("Enter Your Choice : ");
+		int choice = sc.nextInt();
+		sc.nextLine();
+		switch (choice) {
+		case 1:
+			Map<String, Long> countCity = contactList.stream()
+					.collect(Collectors.groupingBy(e -> e.getCity(), Collectors.counting()));
+			System.out.println(countCity + "\n");
+			break;
+		case 2:
+			Map<String, Long> countState = contactList.stream()
+					.collect(Collectors.groupingBy(e -> e.getState(), Collectors.counting()));
+			System.out.println(countState + "\n");
+			break;
+		case 3:
+			return;
+		default:
+			System.out.println("Invalid Option");
 		}
 	}
 }
